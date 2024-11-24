@@ -15,3 +15,6 @@ maybe install numpy 1.26.0 (pip install numpy==1.26.0)
     Enter your prompt and negative prompt, set your image size and batch settings, and hit Queue Prompt. Your GPU fan should kick on after a minute or so and the UI should start indicating progress (Look for a green outline moving around the screen and after a minute or two a progress bar should show up in the terminal and in the box titled KSampler)
 
 After all that, ComfyUI should output an image to the ComfyUI/outputs directory. To launch ComfyUI subsequent times, follow step 6, then step 9. My RX 5700 XT can output an image in 2-6 minutes using Stable Diffusion XL, so if your image is taking 10+ minutes to generate or the progress bar never shows up, something is not working correctly.
+
+Get ComfyUI Manager
+https://github.com/ltdrdata/ComfyUI-Manager
