@@ -19,7 +19,7 @@ After all that, ComfyUI should output an image to the ComfyUI/outputs directory.
 Get ComfyUI Manager
 https://github.com/ltdrdata/ComfyUI-Manager
 
-
+=============================================================================================================================
 
 Prerequisites
 A 'supported' Linux distribution, or at least one that is binary compatible with the list AMD officially supports That means:
