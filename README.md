@@ -18,3 +18,35 @@ After all that, ComfyUI should output an image to the ComfyUI/outputs directory.
 
 Get ComfyUI Manager
 https://github.com/ltdrdata/ComfyUI-Manager
+
+
+
+Prerequisites
+A 'supported' Linux distribution, or at least one that is binary compatible with the list AMD officially supports That means:
+
+Ubuntu 22.04 LTS or Ubuntu 24.04 LTS
+RHEL 8.9 or higher
+SLES 15 SP5 or SP6 (OpenSUSE Leap 15.5 or 15.6)
+Other distributions might ship the rocm packages, but I'm not sure how well they will work.
+
+Installation
+Step 1: Install/update the rocm development libraries for your distribution. You will need at least Rocm 6.2.1. Ensure that all the required development packages are installed. If you are using the official AMD repositories, the rocm-ml-sdk metapackage should install all the required packages.
+Step 2: Clean your pytorch source tree by deleting the build directory and doing a git reset --hard
+Step 2: Update the pytorch source code using git pull and git submodule update --init --recursive
+Step 3: Install/Update pytorch's requirements using pip install -r requirements.txt
+Step 4: Run the AMD build script for Rocm: python3 tools/amd_build/build_amd.py
+Step 5: Build and install pytorch using PYTORCH_ROCM_ARCH=gfx1010 python3 setup.py install
+
+Other Notes
+I am running OpenSUSE Leap 15.6 and use the rocm RPM packages directly from the SLES Rocm repository: https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/native-install/sles.html
+
+GCC will complain about uninitialized and dangling references, but will still successfully compile.
+HIPCC will warn about depricated instructions, but the compilation should still work
+
+You need a GCC/Clang version that supports C++17. On openSUSE Leap 15 the default compiler is GCC 7.5, which does not fully support the C++17 standard. You need to override it with GCC 10 or higher.
+
+The pytorch that is built, cannot use flash attention or memory efficient attention.
+
+While the performance is much faster than running CPU-only, you might still experience occasional GPU lock-ups and crashes, particularly on laptop chips.
+
+Some of Pytorch's tests fail, however workloads like ComfyUI are able to execute successfully.
